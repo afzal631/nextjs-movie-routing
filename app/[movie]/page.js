@@ -8,7 +8,6 @@ export const metadata = {
 };
 
 export default async function IndividualMovie({ params }) {
-  console.log(params);
   const { movie } = params;
   const imagePath = "https://image.tmdb.org/t/p/original";
   const data = await fetch(
@@ -23,29 +22,31 @@ export default async function IndividualMovie({ params }) {
   for (let i = 1; i <= number; i++) {
     numbers.push(i);
   }
+  const placeholderImage = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4Q3zaHR0cDovL....";
+
 
   return (
     <div>
       <div className="lg:px-36 sm:px-[4rem] py-10 xs:px-[2rem] ">
         <h1 className="lg:text-[3rem]  sm:text-[2rem] xs:text-[2rem] text-yellow-300">
-          {res.title}
+          {res?.title}
         </h1>
         <div className="flex">
           <h2 className="text-lg">Released on :</h2>
           <h2 className="text-lg bg-red-500 w-fit ml-1 px-1">
-            {res.release_date}
+            {res?.release_date}
           </h2>
         </div>
         <h2>{res.runtime} minutes</h2>
         <div className="flex justify-between flex-wrap">
           <h2 className="text-sm bg-green-600 inline-block my-2 py-2 px-4 rounded-md">
-            {res.status}
+            {res?.status}
           </h2>
           <div className="flex mt-2 justify-between ">
             <div className="flex items-center">
               <div className="flex items-center">
                 Ratings:
-                {numbers.map(() => {
+                {numbers?.map(() => {
                   return (
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                       <path
@@ -61,14 +62,16 @@ export default async function IndividualMovie({ params }) {
           </div>
         </div>
         <h2 className="flex justify-center mb-2 ">
-          <i className="text-yellow-300">"{res.tagline}"</i>
+          <i className="text-yellow-300">"{res?.tagline}"</i>
         </h2>
-        <Link href={res.homepage} target="_blank">
+        <Link href={res?.homepage} target="_blank">
           <Image
             className="my-4 w-full"
-            src={imagePath + res.backdrop_path}
+            src={imagePath + res?.backdrop_path}
             width={1000}
             height={1000}
+            loading="lazy"
+            blurDataURL={placeholderImage}
           />
         </Link>
         
@@ -77,7 +80,7 @@ export default async function IndividualMovie({ params }) {
             Languages:{" "}
           </h2>
           <div className="flex w-full flex-wrap ml-2">
-            {res.spoken_languages.map((lang) => {
+            {res.spoken_languages?.map((lang) => {
               return (
                 <div className="px-2 py-2 mr-1 my-1 rounded-[1rem] text-sm border transition hover:bg-green-600 ">
                   {lang.name}
@@ -93,7 +96,7 @@ export default async function IndividualMovie({ params }) {
           </p>
         </div>
         <div className="flex w-full flex-wrap  mt-2 ">
-          {res.genres.map((genra) => {
+          {res.genres?.map((genra) => {
             return (
               <div className="px-2 py-2 mr-1 my-1 text-sm rounded-[1rem] border transition hover:bg-green-600 ">
                 {genra.name}

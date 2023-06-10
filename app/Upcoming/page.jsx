@@ -1,21 +1,6 @@
-import Movie from "./movie";
+import Movie from "../movie";
 
 export default async function Home() {
-  const data = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
-  );
-  const res = await data.json();
-  //   console.log(res);
-  const data_toprating = await fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.API_KEY}`
-  );
-  const res_top = await data_toprating.json();
-  //   console.log(res_top);
-  const data_nowplaying = await fetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.API_KEY}`
-  );
-  const res_now = await data_nowplaying.json();
-//   console.log(res_now);
   const data_upcoming = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.API_KEY}`
   );
