@@ -92,10 +92,10 @@ export default async function IndividualMovie({ params }) {
             <i>"{res.overview}"</i>
           </p>
         </div>
-        <div className="flex mt-2 ">
+        <div className="flex w-full flex-wrap  mt-2 ">
           {res.genres.map((genra) => {
             return (
-              <div className="px-2 py-2 mr-1 my-1 rounded-[1rem] border hover:bg-green-600 ">
+              <div className="px-2 py-2 mr-1 my-1 text-sm rounded-[1rem] border transition hover:bg-green-600 ">
                 {genra.name}
               </div>
             );
