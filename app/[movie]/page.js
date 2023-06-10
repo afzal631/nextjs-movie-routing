@@ -19,13 +19,13 @@ export default async function IndividualMovie({ params }) {
   return (
     <div>
       <div
-        className="lg:px-36 sm:px-[4rem] py-10"
-        style={{
-          "@media (min-width: 220px)": {
-            padding: "4rem",
-            // color: 'white',
-          },
-        }}
+        className="lg:px-36 sm:px-[4rem] py-10 xs:px-[2rem] "
+        // style={{
+        //   "@media (min-width: 220px)": {
+        //     padding: "4rem",
+        //     // color: 'white',
+        //   },
+        // }}
       >
         <h1 className="text-2xl">{res.title}</h1>
         <h2 className="text-lg">{res.release_date}</h2>
