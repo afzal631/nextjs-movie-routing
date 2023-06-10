@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
   title: "MOVIEDB",
@@ -14,32 +15,92 @@ export default async function IndividualMovie({ params }) {
     `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
-  //   console.log(res);
+  console.log(res);
+
+  let number = Math.round(res.vote_average);
+  let numbers = [];
+
+  for (let i = 1; i <= number; i++) {
+    numbers.push(i);
+  }
 
   return (
     <div>
-      <div
-        className="lg:px-36 sm:px-[4rem] py-10 xs:px-[2rem] "
-        // style={{
-        //   "@media (min-width: 220px)": {
-        //     padding: "4rem",
-        //     // color: 'white',
-        //   },
-        // }}
-      >
-        <h1 className="text-2xl">{res.title}</h1>
-        <h2 className="text-lg">{res.release_date}</h2>
+      <div className="lg:px-36 sm:px-[4rem] py-10 xs:px-[2rem] ">
+        <h1 className="lg:text-[3rem]  sm:text-[2rem] xs:text-[2rem] text-yellow-300">
+          {res.title}
+        </h1>
+        <div className="flex">
+          <h2 className="text-lg">Released on :</h2>
+          <h2 className="text-lg bg-red-500 w-fit ml-1 px-1">
+            {res.release_date}
+          </h2>
+        </div>
         <h2>{res.runtime} minutes</h2>
-        <h2 className="text-sm bg-green-600 inline-block my-2 py-2 px-4 rounded-md">
-          {res.status}
+        <div className="flex justify-between flex-wrap">
+          <h2 className="text-sm bg-green-600 inline-block my-2 py-2 px-4 rounded-md">
+            {res.status}
+          </h2>
+          <div className="flex mt-2 justify-between ">
+            <div className="flex items-center">
+              <div className="flex items-center">
+                Ratings:
+                {numbers.map(() => {
+                  return (
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path
+                        fill="#FFD700"
+                        d="M12 2L9.18 8.59L3.41 9.82L7.08 14.1L6 19L12 16.27L18 19L16.92 14.1L20.59 9.82L14.82 8.59L12 2Z"
+                      />
+                    </svg>
+                  );
+                })}
+                {number}/10
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 className="flex justify-center mb-2 ">
+          <i className="text-yellow-300">"{res.tagline}"</i>
         </h2>
-        <Image
-          className="my-4 w-full"
-          src={imagePath + res.backdrop_path}
-          width={1000}
-          height={1000}
-        />
-        <p>{res.overview}</p>
+        <Link href={res.homepage} target="_blank">
+          <Image
+            className="my-4 w-full"
+            src={imagePath + res.backdrop_path}
+            width={1000}
+            height={1000}
+          />
+        </Link>
+        
+        <div className="flex justify-end my-2">
+          <h2 className="text-lg flex justify-start lg:items-center xs:items-start sm:items-start ">
+            Languages:{" "}
+          </h2>
+          <div className="flex w-full flex-wrap ml-2">
+            {res.spoken_languages.map((lang) => {
+              return (
+                <div className="px-2 py-2 mr-1 my-1 rounded-[1rem] text-sm border transition hover:bg-green-600 ">
+                  {lang.name}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <h2 className="text-[18px] mr-2 mb-2">Overview: </h2>
+          <p>
+            <i>"{res.overview}"</i>
+          </p>
+        </div>
+        <div className="flex mt-2 ">
+          {res.genres.map((genra) => {
+            return (
+              <div className="px-2 py-2 mr-1 my-1 rounded-[1rem] border hover:bg-green-600 ">
+                {genra.name}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
