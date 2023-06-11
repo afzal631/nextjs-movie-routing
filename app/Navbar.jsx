@@ -135,16 +135,28 @@ export default function NavBar() {
             }`}
           >
             <ul className="items-center justify-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-              <li className="text-white hover:text-blue-600">
+              <li
+                className="text-white hover:text-blue-600"
+                onClick={() => setNavbar(!navbar)}
+              >
                 <Link href="/nowPlaying">Now Playing</Link>
               </li>
-              <li className="text-white hover:text-blue-600">
+              <li
+                className="text-white hover:text-blue-600"
+                onClick={() => setNavbar(!navbar)}
+              >
                 <Link href="/topRated">Top Rated</Link>
               </li>
-              <li className="text-white hover:text-blue-600">
+              <li
+                className="text-white hover:text-blue-600"
+                onClick={() => setNavbar(!navbar)}
+              >
                 <Link href="/Upcoming">Upcoming</Link>
               </li>
-              <li className="text-white hover:text-blue-600">
+              <li
+                className="text-white hover:text-blue-600"
+                onClick={() => setNavbar(!navbar)}
+              >
                 <Link href="/">Contact US</Link>
               </li>
               <li>

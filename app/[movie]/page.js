@@ -135,7 +135,7 @@ export default async function IndividualMovie({ params }) {
                     </div>
 
                     <div className="text-sm bg-green-400 rounded-md p-2 text-center">
-                       {sim?.release_date}
+                      {sim?.release_date}
                     </div>
                   </div>
                 );

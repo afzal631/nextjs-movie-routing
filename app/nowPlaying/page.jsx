@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <main>
       {res_now ? (
-        <div className="grid gap-16 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 px-24 py-[3rem]">
+        <div className="grid gap-16 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 lg:px-24 xs:px-11 py-[3rem]">
           {res_now.results.map((movie) => (
             <Movie
               key={movie.id}
