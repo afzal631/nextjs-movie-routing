@@ -11,6 +11,23 @@
 body::-webkit-scrollbar {
   display: none;
 }
+@layer utilities {
+  .scrollbar {
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: orange;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #eee;
+      border-radius: 4px;
+    }
+  }
+}
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {

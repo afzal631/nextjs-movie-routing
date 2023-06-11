@@ -14,7 +14,12 @@ export default async function IndividualMovie({ params }) {
     `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
-  console.log(res);
+  // console.log(res);
+  const similar = await fetch(
+    `https://api.themoviedb.org/3/movie/${movie}/similar?api_key=${process.env.API_KEY}`
+  );
+  const sim = await similar.json();
+  console.log(sim);
 
   let number = Math.round(res.vote_average);
   let numbers = [];
@@ -22,8 +27,8 @@ export default async function IndividualMovie({ params }) {
   for (let i = 1; i <= number; i++) {
     numbers.push(i);
   }
-  const placeholderImage = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4Q3zaHR0cDovL....";
-
+  const placeholderImage =
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4Q3zaHR0cDovL....";
 
   return (
     <div>
@@ -74,7 +79,7 @@ export default async function IndividualMovie({ params }) {
             blurDataURL={placeholderImage}
           />
         </Link>
-        
+
         <div className="flex justify-end my-2">
           <h2 className="text-lg flex justify-start lg:items-center xs:items-start sm:items-start ">
             Languages:{" "}
@@ -103,6 +108,44 @@ export default async function IndividualMovie({ params }) {
               </div>
             );
           })}
+        </div>
+        <div>
+          <h1 className="text-lg my-6">Similar Movies:</h1>
+          <div className="flex  ">
+            <div className=" overflow-x-auto flex gap-3 scrollbar my-4 py-5">
+              {sim.results?.map((sim) => {
+                return (
+                  <div
+                    className="block-ins-item flex flex-col justify-between"
+                    style={{ minWidth: "16%" }}
+                  >
+                    <Link
+                      className="block-ins-img"
+                      target="_blank"
+                      data-id="1453"
+                      href="/"
+                    >
+                      <Image
+                        src={imagePath + sim?.backdrop_path}
+                        alt="Image "
+                        width={200} // Set the width to a small value, such as 200px
+                        height={150}
+                        // loading="lazy"
+                      />
+                    </Link>
+                    <div className="block-ins-caption text-sm">
+                      {sim?.title}
+                    </div>
+                   
+                      <div className="text-sm bg-green-400 rounded-md p-2 text-center">
+                      Release Date: {sim?.release_date}
+                      </div>
+                   
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
