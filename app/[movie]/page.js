@@ -112,13 +112,10 @@ export default async function IndividualMovie({ params }) {
         <div>
           <h1 className="text-lg my-6">Similar Movies:</h1>
           <div className="flex  ">
-            <div className=" overflow-x-auto flex gap-3 scrollbar my-4 py-5">
+            <div className="overflow-x-auto flex gap-3 scrollbar my-4 py-5">
               {sim.results?.map((sim) => {
                 return (
-                  <div
-                    className="block-ins-item flex flex-col justify-between"
-                    style={{ minWidth: "16%" }}
-                  >
+                  <div className="block-ins-item flex flex-col md:min-w-[24%] sm:min-w-[39%] xs:min-w-[53%] lg:min-w-[16%] justify-between ">
                     <Link
                       className="block-ins-img"
                       target="_blank"
@@ -136,11 +133,10 @@ export default async function IndividualMovie({ params }) {
                     <div className="block-ins-caption text-sm">
                       {sim?.title}
                     </div>
-                   
-                      <div className="text-sm bg-green-400 rounded-md p-2 text-center">
-                      Release Date: {sim?.release_date}
-                      </div>
-                   
+
+                    <div className="text-sm bg-green-400 rounded-md p-2 text-center">
+                       {sim?.release_date}
+                    </div>
                   </div>
                 );
               })}
